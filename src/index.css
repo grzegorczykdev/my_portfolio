@@ -1,0 +1,208 @@
+@import '@fontsource/inter/400.css';
+@import '@fontsource/inter/500.css';
+@import '@fontsource/inter/600.css';
+@import '@fontsource/inter/700.css';
+@import '@fontsource/space-grotesk/500.css';
+@import '@fontsource/space-grotesk/600.css';
+@import '@fontsource/space-grotesk/700.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Premium warm ivory - not clinical white */
+    --background: 60 20% 98%;
+    --foreground: 222 47% 11%;
+
+    /* Card surfaces - slightly warmer */
+    --card: 60 30% 99%;
+    --card-foreground: 222 47% 11%;
+
+    --popover: 60 30% 99%;
+    --popover-foreground: 222 47% 11%;
+
+    /* Deep navy blue - primary brand color */
+    --primary: 222 47% 11%;
+    --primary-foreground: 60 20% 98%;
+
+    /* Soft gray for secondary elements */
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 222 47% 11%;
+
+    /* Muted surfaces */
+    --muted: 220 14% 96%;
+    --muted-foreground: 215 16% 47%;
+
+    /* Gold accent for premium feel */
+    --accent: 43 74% 49%;
+    --accent-foreground: 222 47% 11%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 60 20% 98%;
+
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 222 47% 11%;
+
+    --radius: 0.75rem;
+
+    /* Custom brand colors */
+    --navy: 222 47% 11%;
+    --navy-light: 222 30% 20%;
+    --ivory: 60 20% 98%;
+    --ivory-dark: 60 10% 95%;
+    --gold: 43 74% 49%;
+    --gold-light: 43 74% 65%;
+
+    /* Glassmorphism */
+    --glass-bg: 60 20% 98% / 0.8;
+    --glass-border: 220 13% 91% / 0.5;
+
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 hsl(222 47% 11% / 0.03);
+    --shadow-md: 0 4px 6px -1px hsl(222 47% 11% / 0.05), 0 2px 4px -2px hsl(222 47% 11% / 0.03);
+    --shadow-lg: 0 10px 15px -3px hsl(222 47% 11% / 0.08), 0 4px 6px -4px hsl(222 47% 11% / 0.03);
+    --shadow-xl: 0 20px 25px -5px hsl(222 47% 11% / 0.1), 0 8px 10px -6px hsl(222 47% 11% / 0.05);
+
+    /* Sidebar defaults */
+    --sidebar-background: 60 20% 98%;
+    --sidebar-foreground: 222 47% 11%;
+    --sidebar-primary: 222 47% 11%;
+    --sidebar-primary-foreground: 60 20% 98%;
+    --sidebar-accent: 220 14% 96%;
+    --sidebar-accent-foreground: 222 47% 11%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 222 47% 11%;
+  }
+
+  .dark {
+    --background: 222 47% 6%;
+    --foreground: 60 20% 98%;
+
+    --card: 222 40% 8%;
+    --card-foreground: 60 20% 98%;
+
+    --popover: 222 40% 8%;
+    --popover-foreground: 60 20% 98%;
+
+    --primary: 60 20% 98%;
+    --primary-foreground: 222 47% 11%;
+
+    --secondary: 222 30% 15%;
+    --secondary-foreground: 60 20% 98%;
+
+    --muted: 222 30% 15%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 43 74% 49%;
+    --accent-foreground: 222 47% 11%;
+
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 60 20% 98%;
+
+    --border: 222 30% 18%;
+    --input: 222 30% 18%;
+    --ring: 60 20% 90%;
+
+    --navy: 60 20% 98%;
+    --navy-light: 215 20% 80%;
+    --ivory: 222 47% 6%;
+    --ivory-dark: 222 40% 10%;
+    --gold: 43 74% 55%;
+    --gold-light: 43 74% 65%;
+
+    --glass-bg: 222 40% 8% / 0.8;
+    --glass-border: 222 30% 25% / 0.5;
+
+    --sidebar-background: 222 47% 6%;
+    --sidebar-foreground: 60 20% 98%;
+    --sidebar-primary: 60 20% 98%;
+    --sidebar-primary-foreground: 222 47% 11%;
+    --sidebar-accent: 222 30% 15%;
+    --sidebar-accent-foreground: 60 20% 98%;
+    --sidebar-border: 222 30% 18%;
+    --sidebar-ring: 60 20% 90%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+  }
+}
+
+@layer components {
+  /* Glassmorphism utility */
+  .glass {
+    @apply bg-background/80 backdrop-blur-xl border border-border/50;
+  }
+
+  /* Premium card hover effect */
+  .card-hover {
+    @apply transition-all duration-300 ease-out;
+  }
+
+  .card-hover:hover {
+    @apply -translate-y-1;
+    box-shadow: var(--shadow-xl);
+  }
+
+  /* Gold accent underline */
+  .accent-underline {
+    @apply relative inline-block;
+  }
+
+  .accent-underline::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-full h-[2px] bg-accent;
+  }
+
+  /* Gradient text */
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-primary to-accent;
+  }
+
+  /* Section padding */
+  .section-padding {
+    @apply py-20 md:py-28 lg:py-32;
+  }
+
+  /* Container max width */
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Bento grid item */
+  .bento-item {
+    @apply bg-card rounded-2xl p-6 md:p-8 border border-border/50 card-hover;
+    box-shadow: var(--shadow-md);
+  }
+}
+
+@layer utilities {
+  /* Animation delays */
+  .animation-delay-200 {
+    animation-delay: 200ms;
+  }
+  .animation-delay-400 {
+    animation-delay: 400ms;
+  }
+  .animation-delay-600 {
+    animation-delay: 600ms;
+  }
+}
