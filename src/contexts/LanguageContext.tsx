@@ -115,16 +115,16 @@ export const translations: Translations = {
     pl: "Przejdź do kontaktu",
   },
   "whyme.cta.banner.title": {
-    en: "Your project deserves a technological edge",
-    pl: "Twój projekt zasługuje na technologiczną przewagę",
+    en: "Consulting and shared vision",
+    pl: "Doradztwo i wspólna wizja",
   },
   "whyme.cta.banner.body": {
-    en: "Let’s talk about how AI and SEO can start working for your success.",
-    pl: "Porozmawiajmy o tym, jak AI i SEO mogą zacząć pracować na Twój sukces.",
+    en: "Your business is unique, so before I write the first line of code, I listen to your needs. I act as your technological advisor. Together, we design solutions that best address your industry's challenges. It's a partnership where my technical expertise meets your business experience to create a product perfectly tailored to your customers.",
+    pl: "Twój biznes jest unikalny, dlatego zanim postawię pierwszą linię kodu, słucham Twoich potrzeb. Działam jako Twój doradca technologiczny. Wspólnie projektujemy rozwiązania, które najlepiej odpowiedzą na wyzwania Twojej branży. To partnerstwo, w którym moja wiedza techniczna spotyka się z Twoim doświadczeniem biznesowym, by stworzyć produkt idealnie skrojony pod Twoich klientów.",
   },
   "whyme.cta.banner.note": {
-    en: "Schedule a free consultation.",
-    pl: "Umów się na darmową konsultację",
+    en: "",
+    pl: "",
   },
   "whyme.combined.title": {
     en: "Architecture of Success: Code and Strategy",
