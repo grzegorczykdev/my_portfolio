@@ -1,6 +1,6 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { ArrowRight, Bot, Palette, Rocket, ServerCog, ShieldCheck, Sparkles } from 'lucide-react';
+import { ArrowRight, Palette, Rocket, ServerCog, ShieldCheck, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
 
@@ -17,6 +17,7 @@ const ServicesSection = () => {
       titleKey: 'services.group.dev.title',
       descKey: 'services.group.dev.desc',
       bullets: ['services.group.dev.b1', 'services.group.dev.b2', 'services.group.dev.b3'],
+      ctaKey: 'services.group.dev.cta',
     },
     {
       icon: Sparkles,
@@ -25,6 +26,7 @@ const ServicesSection = () => {
       titleKey: 'services.group.seoai.title',
       descKey: 'services.group.seoai.desc',
       bullets: ['services.group.seoai.b1', 'services.group.seoai.b2', 'services.group.seoai.b3'],
+      ctaKey: 'services.group.seoai.cta',
     },
     {
       icon: ServerCog,
@@ -33,6 +35,7 @@ const ServicesSection = () => {
       titleKey: 'services.group.care.title',
       descKey: 'services.group.care.desc',
       bullets: ['services.group.care.b1', 'services.group.care.b2', 'services.group.care.b3'],
+      ctaKey: 'services.group.care.cta',
     },
   ];
 
@@ -79,7 +82,7 @@ const ServicesSection = () => {
               <motion.article
                 key={group.titleKey}
                 variants={fadeUp}
-                className={`bento-item h-full flex flex-col gap-4 glass bg-white/[0.03] border-white/10 text-white ${
+                className={`bento-item h-full flex flex-col gap-4 glass bg-white/[0.03] border border-white/10 text-white transform-gpu transition-all duration-300 hover:scale-[1.02] hover:border-accent/30 hover:shadow-[0_0_22px_rgba(244,213,154,0.22)] hover:bg-white/8 hover:backdrop-blur-lg ${
                   isLast ? 'md:col-span-2 xl:col-span-1' : ''
                 }`}
               >
@@ -105,6 +108,16 @@ const ServicesSection = () => {
                     </li>
                   ))}
                 </ul>
+                <Button
+                  asChild
+                  variant="ghost"
+                  className="mt-4 self-start w-fit border border-accent/50 text-accent bg-transparent uppercase tracking-wide text-sm font-semibold px-5 py-2 rounded-lg transition-all duration-300 hover:bg-accent hover:text-primary hover:shadow-[0_8px_24px_rgba(244,213,154,0.22)]"
+                >
+                  <a href="#contact" className="flex items-center gap-2">
+                    {t(group.ctaKey)}
+                    <ArrowRight className="w-4 h-4" />
+                  </a>
+                </Button>
               </motion.article>
             );
           })}

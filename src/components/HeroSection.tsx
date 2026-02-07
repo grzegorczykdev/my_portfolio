@@ -143,7 +143,7 @@ const HeroSection = () => {
                 variant="heroOutline"
                 size="xl"
                 onClick={() => scrollToSection("#services")}
-                className="glass border-white/30 shadow-premium-lg"
+                className="glass border border-white/20 shadow-premium-lg text-primary"
               >
                 {t("hero.cta.secondary")}
               </Button>

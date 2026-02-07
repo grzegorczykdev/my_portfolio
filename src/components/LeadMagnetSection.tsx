@@ -172,7 +172,6 @@ const LeadMagnetSection = () => {
                     required
                     value={formData.name}
                     onChange={handleChange}
-                    placeholder="John Doe"
                     className={errors.name ? 'border-destructive' : ''}
                   />
                   {errors.name && <p className="text-xs text-destructive mt-1">{errors.name}</p>}
@@ -189,7 +188,6 @@ const LeadMagnetSection = () => {
                     required
                     value={formData.email}
                     onChange={handleChange}
-                    placeholder="john@example.com"
                     className={errors.email ? 'border-destructive' : ''}
                   />
                   {errors.email && <p className="text-xs text-destructive mt-1">{errors.email}</p>}
@@ -205,7 +203,6 @@ const LeadMagnetSection = () => {
                     required
                     value={formData.message}
                     onChange={handleChange}
-                    placeholder={t('lead.messagePlaceholder')}
                     className={`w-full rounded-md border bg-transparent px-3 py-3 text-sm text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 ${
                       errors.message ? 'border-destructive' : 'border-border'
                     }`}
@@ -236,6 +233,9 @@ const LeadMagnetSection = () => {
                     <span className="flex items-center gap-2">{t('lead.submit')}</span>
                   )}
                 </Button>
+                <p className="text-xs text-muted-foreground text-center">
+                  {t('lead.privacyNote')}
+                </p>
                 <div data-netlify-recaptcha="true" className="flex justify-center" />
                 {submitError && (
                   <p className="text-xs text-destructive text-center">{submitError}</p>

@@ -27,13 +27,23 @@ const WhyMeSection = () => {
       icon: TrendingUp,
       titleKey: 'whyme.seo_ai.title',
       descriptionKey: 'whyme.seo_ai.description',
-      skills: ['SEO', 'AI assistants', 'Schema', 'Content ops'],
+      skills: [
+        'whyme.seo_ai.skill1',
+        'whyme.seo_ai.skill2',
+        'whyme.seo_ai.skill3',
+        'whyme.seo_ai.skill4',
+      ],
     },
     {
       icon: Cpu,
       titleKey: 'whyme.modern_ai.title',
       descriptionKey: 'whyme.modern_ai.description',
-      skills: ['Automation', 'Payments', 'AI chatbots', '24/7 sales'],
+      skills: [
+        'whyme.modern_ai.skill1',
+        'whyme.modern_ai.skill2',
+        'whyme.modern_ai.skill3',
+        'whyme.modern_ai.skill4',
+      ],
     },
     {
       icon: Users,
@@ -47,7 +57,12 @@ const WhyMeSection = () => {
     icon: Code2,
     titleKey: 'whyme.combined.title',
     descriptionKey: 'whyme.combined.description',
-    skills: ['Custom Development', 'SEO-Ready Code', 'Core Web Vitals', 'Security'],
+  skills: [
+    'whyme.combined.skill1',
+    'whyme.combined.skill2',
+    'whyme.combined.skill3',
+    'whyme.combined.skill4',
+  ],
   };
 
   const secondaryFeatures = [features[2], features[3]];
@@ -86,8 +101,8 @@ const WhyMeSection = () => {
           transition={{ duration: 0.6 }}
           className="text-center max-w-2xl mx-auto mb-16"
         >
-          <span className="text-sm font-semibold text-accent uppercase tracking-wider">
-            About Me
+          <span className="text-sm font-semibold text-primary uppercase tracking-wider">
+          {t('whyme.header')}
           </span>
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-primary mt-4">
             {t('whyme.title')}
@@ -113,8 +128,11 @@ const WhyMeSection = () => {
             <h3 className="font-display text-2xl font-bold text-primary mb-4 leading-tight">
               {t(combinedFeature.titleKey)}
             </h3>
-            <p className="text-muted-foreground leading-relaxed mb-6">
+            <p className="text-muted-foreground leading-relaxed mb-2">
               {t(combinedFeature.descriptionKey)}
+            </p>
+            <p className="text-muted-foreground leading-relaxed mb-4">
+              <span className="font-semibold text-primary">{t('whyme.effect.label')}:</span> {t('whyme.quality.effect')}
             </p>
             <div className="flex flex-wrap gap-2 mt-auto">
               {combinedFeature.skills.map((skill) => (
@@ -122,7 +140,7 @@ const WhyMeSection = () => {
                   key={skill}
                   className="px-3 py-1 text-xs font-medium glass border border-white/30 text-muted-foreground rounded-full"
                 >
-                  {skill}
+                  {t(skill)}
                 </span>
               ))}
             </div>
@@ -148,8 +166,18 @@ const WhyMeSection = () => {
               <h3 className="font-display text-xl font-bold text-primary mb-3">
                 {t(feature.titleKey)}
               </h3>
-              <p className="text-muted-foreground leading-relaxed mb-6">
+              <p className="text-muted-foreground leading-relaxed mb-2">
                 {t(feature.descriptionKey)}
+              </p>
+              <p className="text-muted-foreground leading-relaxed mb-4">
+                <span className="font-semibold text-primary">{t('whyme.effect.label')}:</span>{' '}
+                {t(
+                  feature.titleKey === 'whyme.strategy.title'
+                    ? 'whyme.strategy.effect'
+                    : feature.titleKey === 'whyme.seo_ai.title'
+                    ? 'whyme.seo_ai.effect'
+                    : 'whyme.strategy.effect'
+                )}
               </p>
 
               {/* Skills Tags */}
@@ -159,7 +187,7 @@ const WhyMeSection = () => {
                       key={skill}
                       className="px-3 py-1 text-xs font-medium glass border border-white/30 text-muted-foreground rounded-full"
                     >
-                      {skill}
+                      {t(skill)}
                     </span>
                   ))}
                 </div>
