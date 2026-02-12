@@ -532,6 +532,30 @@ export const translations: Translations = {
     en: "Please wait a moment before sending again.",
     pl: "Poczekaj chwilę przed ponownym wysłaniem.",
   },
+  "lead.errors.nameRequired": {
+    en: "Name is required",
+    pl: "Imię jest wymagane",
+  },
+  "lead.errors.nameTooLong": {
+    en: "Name is too long",
+    pl: "Imię jest za długie",
+  },
+  "lead.errors.emailInvalid": {
+    en: "Invalid email address",
+    pl: "Nieprawidłowy adres email",
+  },
+  "lead.errors.emailTooLong": {
+    en: "Email is too long",
+    pl: "Email jest za długi",
+  },
+  "lead.errors.messageTooShort": {
+    en: "Message is too short (min. 10 characters)",
+    pl: "Wiadomość jest za krótka (min. 10 znaków)",
+  },
+  "lead.errors.messageTooLong": {
+    en: "Message is too long",
+    pl: "Wiadomość jest za długa",
+  },
 
   // FAQ
   "faq.title": { en: "FAQ", pl: "FAQ" },

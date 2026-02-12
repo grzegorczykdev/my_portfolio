@@ -106,9 +106,20 @@ const LeadMagnetSection = () => {
         setShowShake(true);
         setTimeout(() => setShowShake(false), 400);
         const newErrors: Record<string, string> = {};
+        const errorKey = (path: string, code: string, validation?: string): string => {
+          if (path === 'name' && code === 'too_small') return 'lead.errors.nameRequired';
+          if (path === 'name' && code === 'too_big') return 'lead.errors.nameTooLong';
+          if (path === 'email' && validation === 'email') return 'lead.errors.emailInvalid';
+          if (path === 'email' && code === 'too_big') return 'lead.errors.emailTooLong';
+          if (path === 'message' && code === 'too_small') return 'lead.errors.messageTooShort';
+          if (path === 'message' && code === 'too_big') return 'lead.errors.messageTooLong';
+          return 'lead.errors.messageTooShort';
+        };
         error.errors.forEach((err) => {
-          if (err.path[0]) {
-            newErrors[err.path[0] as string] = err.message;
+          const path = err.path[0] as string | undefined;
+          if (path) {
+            const key = errorKey(path, err.code, (err as { validation?: string }).validation);
+            newErrors[path] = t(key);
           }
         });
         setErrors(newErrors);
