@@ -13,7 +13,7 @@ const Footer = () => {
       label: "LinkedIn",
     },
     // { icon: Github, href: "#", label: "GitHub" },
-    { icon: Mail, href: "mailto:hello@sylwia.dev", label: "Email" },
+    { icon: Mail, href: "mailto:hello@sgweblab.com", label: "Email" },
   ];
 
   return (
