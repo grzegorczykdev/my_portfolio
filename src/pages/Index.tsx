@@ -1,11 +1,13 @@
+import { lazy, Suspense } from 'react';
 import { Navigate, useLocation, useParams } from 'react-router-dom';
 import { LanguageProvider } from '@/contexts/LanguageContext';
 import Navbar from '@/components/Navbar';
 import HeroSection from '@/components/HeroSection';
-import WhyMeSection from '@/components/WhyMeSection';
-import ServicesSection from '@/components/ServicesSection';
-import LeadMagnetSection from '@/components/LeadMagnetSection';
 import Footer from '@/components/Footer';
+
+const WhyMeSection = lazy(() => import('@/components/WhyMeSection'));
+const ServicesSection = lazy(() => import('@/components/ServicesSection'));
+const LeadMagnetSection = lazy(() => import('@/components/LeadMagnetSection'));
 
 const Index = () => {
   const location = useLocation();
@@ -23,9 +25,11 @@ const Index = () => {
         <Navbar />
         <main>
           <HeroSection />
-          <WhyMeSection />
-          <ServicesSection />
-          <LeadMagnetSection />
+          <Suspense fallback={<div className="min-h-[60vh]" aria-hidden="true" />}>
+            <WhyMeSection />
+            <ServicesSection />
+            <LeadMagnetSection />
+          </Suspense>
         </main>
         <Footer />
       </div>

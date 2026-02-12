@@ -78,8 +78,10 @@ const LeadMagnetSection = () => {
     setRateLimited(isRateLimited());
   }, []);
 
-  // Ensure reCAPTCHA script is available in local/dev; Netlify injects it on production.
+  // Load reCAPTCHA only when form section is in view (perf: defers ~200ms JS until needed)
   useEffect(() => {
+    if (!isInView) return;
+
     const existingScript = document.querySelector<HTMLScriptElement>(
       'script[src="https://www.google.com/recaptcha/api.js"]',
     );
@@ -92,9 +94,13 @@ const LeadMagnetSection = () => {
     document.body.appendChild(script);
 
     return () => {
-      document.body.removeChild(script);
+      try {
+        document.body.removeChild(script);
+      } catch {
+        /* already removed */
+      }
     };
-  }, []);
+  }, [isInView]);
 
   // Reset to default after 4s success; clear form fields only
   useEffect(() => {
