@@ -18,7 +18,7 @@ const HeroSection = () => {
       <div className="absolute bottom-1/4 left-1/4 w-64 h-64 bg-primary/5 rounded-full blur-3xl" />
 
       <div className="container-hero-mobile relative z-10">
-        <div className="grid lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
+        <div className="grid lg:grid-cols-2 gap-4 md:gap-12 lg:gap-16 items-center">
           {/* Left Column - Content */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -126,7 +126,7 @@ const HeroSection = () => {
             transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
             className="relative"
           >
-            <div className="relative aspect-[4/5] max-w-md mx-auto">
+            <div className="relative aspect-[2/1] lg:aspect-[4/5] w-full lg:max-w-md lg:mx-auto overflow-hidden">
               {/* Portrait frame with premium styling */}
               <div className="absolute inset-0 bg-gradient-to-br from-secondary to-muted rounded-3xl overflow-hidden shadow-premium-xl">
                 {/* Decorative pattern */}

@@ -15,6 +15,8 @@ const ServicesSection = () => {
       badgeBg: 'bg-accent/15',
       badgeText: 'text-accent',
       ctaStyles: 'text-accent border-accent/40 bg-accent/10 hover:bg-accent/20 hover:border-accent/60 hover:shadow-[0_8px_24px_rgba(244,213,154,0.15)]',
+      cardHighlight:
+        'hover:border-accent/30 hover:shadow-[0_0_22px_rgba(244,213,154,0.22)] focus-within:border-accent/40 focus-within:shadow-[0_0_24px_rgba(244,213,154,0.28)] focus-within:ring-2 focus-within:ring-accent/40',
       titleKey: 'services.group.dev.title',
       descKey: 'services.group.dev.desc',
       bullets: ['services.group.dev.b1', 'services.group.dev.b2', 'services.group.dev.b3'],
@@ -25,6 +27,8 @@ const ServicesSection = () => {
       badgeBg: 'bg-indigo-400/15',
       badgeText: 'text-indigo-200',
       ctaStyles: 'text-indigo-200 border-indigo-400/40 bg-indigo-400/10 hover:bg-indigo-400/20 hover:border-indigo-400/60 hover:shadow-[0_8px_24px_rgba(129,140,248,0.15)]',
+      cardHighlight:
+        'hover:border-indigo-400/30 hover:shadow-[0_0_22px_rgba(129,140,248,0.22)] focus-within:border-indigo-400/40 focus-within:shadow-[0_0_24px_rgba(129,140,248,0.28)] focus-within:ring-2 focus-within:ring-indigo-400/40',
       titleKey: 'services.group.seoai.title',
       descKey: 'services.group.seoai.desc',
       bullets: ['services.group.seoai.b1', 'services.group.seoai.b2', 'services.group.seoai.b3'],
@@ -35,6 +39,8 @@ const ServicesSection = () => {
       badgeBg: 'bg-emerald-400/15',
       badgeText: 'text-emerald-200',
       ctaStyles: 'text-emerald-200 border-emerald-400/40 bg-emerald-400/10 hover:bg-emerald-400/20 hover:border-emerald-400/60 hover:shadow-[0_8px_24px_rgba(52,211,153,0.15)]',
+      cardHighlight:
+        'hover:border-emerald-400/30 hover:shadow-[0_0_22px_rgba(52,211,153,0.22)] focus-within:border-emerald-400/40 focus-within:shadow-[0_0_24px_rgba(52,211,153,0.28)] focus-within:ring-2 focus-within:ring-emerald-400/40',
       titleKey: 'services.group.care.title',
       descKey: 'services.group.care.desc',
       bullets: ['services.group.care.b1', 'services.group.care.b2', 'services.group.care.b3'],
@@ -85,7 +91,7 @@ const ServicesSection = () => {
               <motion.article
                 key={group.titleKey}
                 variants={fadeUp}
-                className={`bento-item h-full flex flex-col gap-4 glass bg-white/[0.03] border border-white/10 text-white transform-gpu transition-all duration-300 hover:scale-[1.02] hover:border-accent/30 hover:shadow-[0_0_22px_rgba(244,213,154,0.22)] hover:bg-white/8 hover:backdrop-blur-lg ${
+                className={`bento-item h-full flex flex-col gap-4 glass bg-white/[0.03] border border-white/10 text-white transform-gpu transition-all duration-300 hover:scale-[1.02] hover:bg-white/8 hover:backdrop-blur-lg outline-none ${group.cardHighlight} ${
                   isLast ? 'md:col-span-2 xl:col-span-1' : ''
                 }`}
               >
@@ -106,7 +112,7 @@ const ServicesSection = () => {
                 <ul className="space-y-2 text-sm text-white/80">
                   {group.bullets.map((item) => (
                     <li key={item} className="flex items-start gap-2">
-                      <ShieldCheck className="w-4 h-4 text-accent mt-0.5 flex-shrink-0" />
+                      <ShieldCheck className={`w-4 h-4 mt-0.5 flex-shrink-0 ${group.badgeText}`} />
                       <span>{t(item)}</span>
                     </li>
                   ))}
