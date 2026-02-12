@@ -70,6 +70,7 @@ const LeadMagnetSection = () => {
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [showShake, setShowShake] = useState(false);
   const [rateLimited, setRateLimited] = useState(false);
+  const [showRateLimitMessage, setShowRateLimitMessage] = useState(false);
 
   useEffect(() => {
     setRateLimited(isRateLimited());
@@ -110,6 +111,13 @@ const LeadMagnetSection = () => {
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: '' }));
     }
+    if (rateLimited && name === 'message') {
+      setShowRateLimitMessage(true);
+    }
+  };
+
+  const handleMessageFocus = () => {
+    if (rateLimited) setShowRateLimitMessage(true);
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -295,6 +303,7 @@ const LeadMagnetSection = () => {
                     name="message"
                     value={formData.message}
                     onChange={handleChange}
+                    onFocus={handleMessageFocus}
                     className={`w-full rounded-md border bg-transparent px-3 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus-visible:outline-none transition-colors duration-200 ${
                       errors.message ? 'border-destructive' : 'border-border'
                     }`}
@@ -370,7 +379,7 @@ const LeadMagnetSection = () => {
                   {t('lead.antiSpamNote')}
                 </p>
                 <div data-netlify-recaptcha="true" className="flex justify-center" />
-                {rateLimited && (
+                {rateLimited && showRateLimitMessage && (
                   <p className="text-xs text-destructive text-center">
                     {t('lead.rateLimitExceeded')}
                     <a
