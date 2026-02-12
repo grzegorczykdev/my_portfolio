@@ -27,6 +27,7 @@ const LeadMagnetSection = () => {
   const [buttonState, setButtonState] = useState<ButtonState>('default');
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [lastSubmitAt, setLastSubmitAt] = useState<number | null>(null);
+  const [showShake, setShowShake] = useState(false);
 
   // Ensure reCAPTCHA script is available in local/dev; Netlify injects it on production.
   useEffect(() => {
@@ -102,6 +103,8 @@ const LeadMagnetSection = () => {
       setLastSubmitAt(Date.now());
     } catch (error) {
       if (error instanceof z.ZodError) {
+        setShowShake(true);
+        setTimeout(() => setShowShake(false), 400);
         const newErrors: Record<string, string> = {};
         error.errors.forEach((err) => {
           if (err.path[0]) {
@@ -153,6 +156,7 @@ const LeadMagnetSection = () => {
                 data-netlify-honeypot="bot-field"
                 data-netlify-recaptcha="true"
                 onSubmit={handleSubmit}
+                noValidate
                 className="space-y-4 glass rounded-2xl p-4 md:p-6 border border-white/20 shadow-premium-lg bg-white/5"
               >
                 <input type="hidden" name="form-name" value="contact" />
@@ -167,7 +171,9 @@ const LeadMagnetSection = () => {
                     />
                   </label>
                 </div>
-                <div>
+                <motion.div
+                  className={errors.name && showShake ? 'animate-form-shake' : ''}
+                >
                   <label htmlFor="name" className="block text-sm font-medium text-primary mb-2">
                     {t('lead.name')}
                   </label>
@@ -175,15 +181,25 @@ const LeadMagnetSection = () => {
                     id="name"
                     name="name"
                     type="text"
-                    required
                     value={formData.name}
                     onChange={handleChange}
-                    className={errors.name ? 'border-destructive' : ''}
+                    className={`transition-colors duration-200 ${errors.name ? 'border-destructive' : ''}`}
                   />
-                  {errors.name && <p className="text-xs text-destructive mt-1">{errors.name}</p>}
-                </div>
+                  {errors.name && (
+                    <motion.p
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.25 }}
+                      className="text-xs text-destructive mt-1"
+                    >
+                      {errors.name}
+                    </motion.p>
+                  )}
+                </motion.div>
 
-                <div>
+                <motion.div
+                  className={errors.email && showShake ? 'animate-form-shake' : ''}
+                >
                   <label htmlFor="email" className="block text-sm font-medium text-primary mb-2">
                     {t('lead.email')}
                   </label>
@@ -191,33 +207,49 @@ const LeadMagnetSection = () => {
                     id="email"
                     name="email"
                     type="email"
-                    required
                     value={formData.email}
                     onChange={handleChange}
-                    className={errors.email ? 'border-destructive' : ''}
+                    className={`transition-colors duration-200 ${errors.email ? 'border-destructive' : ''}`}
                   />
-                  {errors.email && <p className="text-xs text-destructive mt-1">{errors.email}</p>}
-                </div>
+                  {errors.email && (
+                    <motion.p
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.25 }}
+                      className="text-xs text-destructive mt-1"
+                    >
+                      {errors.email}
+                    </motion.p>
+                  )}
+                </motion.div>
 
-                <div>
+                <motion.div
+                  className={errors.message && showShake ? 'animate-form-shake' : ''}
+                >
                   <label htmlFor="message" className="block text-sm font-medium text-primary mb-2">
                     {t('lead.messageLabel')}
                   </label>
                   <textarea
                     id="message"
                     name="message"
-                    required
                     value={formData.message}
                     onChange={handleChange}
-                    className={`w-full rounded-md border bg-transparent px-3 py-3 text-sm text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 ${
+                    className={`w-full rounded-md border bg-transparent px-3 py-3 text-sm text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 transition-colors duration-200 ${
                       errors.message ? 'border-destructive' : 'border-border'
                     }`}
                     rows={4}
                   />
                   {errors.message && (
-                    <p className="text-xs text-destructive mt-1">{errors.message}</p>
+                    <motion.p
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.25 }}
+                      className="text-xs text-destructive mt-1"
+                    >
+                      {errors.message}
+                    </motion.p>
                   )}
-                </div>
+                </motion.div>
 
                 <motion.button
                   type="submit"

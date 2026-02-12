@@ -25,8 +25,14 @@ export const translations: Translations = {
 
   // Hero Section
   "hero.stats.years": { en: "Years of Experience", pl: "Lata doświadczenia" },
-  "hero.stats.projects": { en: "Projects Delivered", pl: "Dostarczone projekty" },
-  "hero.stats.satisfaction": { en: "Client Satisfaction", pl: "Zadowoleni klienci" },
+  "hero.stats.projects": {
+    en: "Projects Delivered",
+    pl: "Dostarczone projekty",
+  },
+  "hero.stats.satisfaction": {
+    en: "Client Satisfaction",
+    pl: "Zadowoleni klienci",
+  },
   "hero.headline": {
     en: "Comprehensive websites and SEO strategy. I will create a modern online image for your company.",
     pl: "Twoja strona, która sprzedaje. Zbuduję nowoczesny wizerunek Twojej firmy w sieci.",
@@ -110,8 +116,14 @@ export const translations: Translations = {
     pl: "Nie wiesz od czego zacząć? Przeprowadzę Cię przez cały proces, od wyboru domeny po konfigurację wizytówki, aż do wdrożenia i optymalizacji strony. Otrzymujesz ode mnie pełne wsparcie i narzędzie, które naprawdę rozumiesz i potrafisz obsługiwać.",
   },
   "whyme.modern_ai.skill1": { en: "Support A to Z", pl: "Wsparcie od A do Z" },
-  "whyme.modern_ai.skill2": { en: "Clear action plan", pl: "Jasny plan działania" },
-  "whyme.modern_ai.skill3": { en: "Business advisory", pl: "Doradztwo biznesowe" },
+  "whyme.modern_ai.skill2": {
+    en: "Clear action plan",
+    pl: "Jasny plan działania",
+  },
+  "whyme.modern_ai.skill3": {
+    en: "Business advisory",
+    pl: "Doradztwo biznesowe",
+  },
   "whyme.modern_ai.skill4": { en: "Plain language", pl: "Prosty język" },
   "whyme.effect.label": { en: "Effect", pl: "Efekt" },
   "whyme.quality.effect": {
@@ -164,7 +176,10 @@ export const translations: Translations = {
   },
   "whyme.combined.skill1": { en: "Loading speed", pl: "Szybkość ładowania" },
   "whyme.combined.skill2": { en: "Unique design", pl: "Unikalny projekt" },
-  "whyme.combined.skill3": { en: "Optimized for Google", pl: "Optymalizacja pod Google" },
+  "whyme.combined.skill3": {
+    en: "Optimized for Google",
+    pl: "Optymalizacja pod Google",
+  },
   "whyme.combined.skill4": { en: "Security", pl: "Bezpieczeństwo" },
   // Services Section
   "services.title": { en: "Services", pl: "Usługi" },
@@ -228,7 +243,10 @@ export const translations: Translations = {
     en: "If you need a quick and cheaper solution, I'll build a fast business card site on one of my templates.",
     pl: "Pełna responsywność: bezbłędne wyświetlanie i obsługa na urządzeniach mobilnych oraz tabletach.",
   },
-  "services.group.dev.cta": { en: "I want a new website", pl: "Chcę nową stronę" },
+  "services.group.dev.cta": {
+    en: "I want a new website",
+    pl: "Chcę nową stronę",
+  },
   "services.group.seoai.title": {
     en: "Visibility in search and modern customer service",
     pl: "Widocznośc w wyszukiwarkach i nowoczesna obsługa klienta",
@@ -249,7 +267,10 @@ export const translations: Translations = {
     en: "I'll make sure local clients can see you on Google Maps.",
     pl: "Optymalizacja w Mapach Google: zwiększenie widoczności firmy dla klientów z Twojej najbliższej okolicy.",
   },
-  "services.group.seoai.cta": { en: "Check my visibility", pl: "Sprawdź moją widoczność" },
+  "services.group.seoai.cta": {
+    en: "Check my visibility",
+    pl: "Sprawdź moją widoczność",
+  },
   "services.group.care.title": {
     en: "Full technical care - your external IT department.",
     pl: "Pełna opieka techniczna - Twój zewnętrzny dział IT.",
@@ -270,7 +291,10 @@ export const translations: Translations = {
     en: "I'll take care of security and keeping the data on the site up to date.",
     pl: "Stałe wsparcie i bezpieczeństwo: regularne aktualizacje danych oraz monitoring poprawności działania strony.",
   },
-  "services.group.care.cta": { en: "I need support", pl: "Potrzebuję wsparcia" },
+  "services.group.care.cta": {
+    en: "I need support",
+    pl: "Potrzebuję wsparcia",
+  },
 
   // Offer - Challenge Section
   "offer.challenge.title": {
@@ -509,8 +533,6 @@ export const translations: Translations = {
     pl: "Poczekaj chwilę przed ponownym wysłaniem.",
   },
 
-
-
   // FAQ
   "faq.title": { en: "FAQ", pl: "FAQ" },
   "faq.subtitle": {
@@ -580,7 +602,7 @@ interface LanguageProviderProps {
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(
-  undefined
+  undefined,
 );
 
 export const LanguageProvider: React.FC<LanguageProviderProps> = ({
@@ -588,7 +610,7 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({
   initialLanguage = "en",
 }) => {
   const [language, setLanguage] = useState<Language>(() =>
-    normalizeLanguage(initialLanguage)
+    normalizeLanguage(initialLanguage),
   );
 
   useEffect(() => {
