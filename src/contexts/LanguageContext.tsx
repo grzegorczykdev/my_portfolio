@@ -22,6 +22,8 @@ export const translations: Translations = {
   "nav.services": { en: "Services", pl: "Usługi" },
   "nav.contact": { en: "Contact", pl: "Kontakt" },
   "nav.cta.contact": { en: "Get in touch", pl: "Skontaktuj się ze mną" },
+  "nav.menu.open": { en: "Open menu", pl: "Otwórz menu" },
+  "nav.menu.close": { en: "Close menu", pl: "Zamknij menu" },
 
   // Hero Section
   "hero.stats.years": { en: "Years of experience", pl: "Lata doświadczenia" },

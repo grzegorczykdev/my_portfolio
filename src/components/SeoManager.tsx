@@ -47,8 +47,11 @@ const SeoManager = () => {
   const defaultHref = `${BASE_URL}/en${slug}`;
   const seo = SEO_BY_LANG[lang];
 
+  const canonicalUrl = `${BASE_URL}/${lang}${slug}`;
+
   return (
     <Helmet>
+      <link rel="canonical" href={canonicalUrl} />
       <title>{seo.title}</title>
       <meta name="description" content={seo.description} />
       <meta property="og:title" content={seo.title} />

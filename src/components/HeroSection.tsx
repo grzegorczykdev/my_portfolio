@@ -34,7 +34,7 @@ const HeroSection = () => {
               className="inline-flex items-center gap-2 px-4 py-2 bg-secondary rounded-full"
             >
               <Sparkles className="w-4 h-4 text-accent" />
-              <span className="text-sm font-medium text-muted-foreground">
+              <span className="text-sm font-medium text-foreground">
                 Full Stack Engineer & SEO Expert
               </span>
             </motion.div>
