@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Input } from "@/components/ui/input";
+import ContactFormField from "@/components/ContactFormField";
 import { z } from "zod";
 
 const RATE_LIMIT_KEY = "sgweblab_form_hits";
@@ -276,15 +277,12 @@ const LeadMagnetSection = () => {
                   />
                 </label>
               </div>
-              <motion.div
-                className={errors.name && showShake ? "animate-form-shake" : ""}
+              <ContactFormField
+                labelKey="lead.name"
+                id="name"
+                error={errors.name}
+                showShake={showShake}
               >
-                <label
-                  htmlFor="name"
-                  className="block text-sm font-medium text-primary mb-2"
-                >
-                  {t("lead.name")}
-                </label>
                 <Input
                   id="name"
                   name="name"
@@ -294,29 +292,14 @@ const LeadMagnetSection = () => {
                   maxLength={100}
                   className={`transition-colors duration-200 ${errors.name ? "border-destructive" : ""}`}
                 />
-                {errors.name && (
-                  <motion.p
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.25 }}
-                    className="text-xs text-destructive mt-1"
-                  >
-                    {errors.name}
-                  </motion.p>
-                )}
-              </motion.div>
+              </ContactFormField>
 
-              <motion.div
-                className={
-                  errors.email && showShake ? "animate-form-shake" : ""
-                }
+              <ContactFormField
+                labelKey="lead.email"
+                id="email"
+                error={errors.email}
+                showShake={showShake}
               >
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium text-primary mb-2"
-                >
-                  {t("lead.email")}
-                </label>
                 <Input
                   id="email"
                   name="email"
@@ -326,29 +309,19 @@ const LeadMagnetSection = () => {
                   maxLength={255}
                   className={`transition-colors duration-200 ${errors.email ? "border-destructive" : ""}`}
                 />
-                {errors.email && (
-                  <motion.p
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.25 }}
-                    className="text-xs text-destructive mt-1"
-                  >
-                    {errors.email}
-                  </motion.p>
-                )}
-              </motion.div>
+              </ContactFormField>
 
-              <motion.div
-                className={
-                  errors.message && showShake ? "animate-form-shake" : ""
+              <ContactFormField
+                labelKey="lead.messageLabel"
+                id="message"
+                error={errors.message}
+                showShake={showShake}
+                hint={
+                  <p className="text-xs text-muted-foreground text-right mt-1">
+                    {formData.message.length} / 2000
+                  </p>
                 }
               >
-                <label
-                  htmlFor="message"
-                  className="block text-sm font-medium text-primary mb-2"
-                >
-                  {t("lead.messageLabel")}
-                </label>
                 <textarea
                   id="message"
                   name="message"
@@ -361,20 +334,7 @@ const LeadMagnetSection = () => {
                   }`}
                   rows={4}
                 />
-                <p className="text-xs text-muted-foreground text-right mt-1">
-                  {formData.message.length} / 2000
-                </p>
-                {errors.message && (
-                  <motion.p
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.25 }}
-                    className="text-xs text-destructive mt-1"
-                  >
-                    {errors.message}
-                  </motion.p>
-                )}
-              </motion.div>
+              </ContactFormField>
 
               <motion.button
                 type="submit"

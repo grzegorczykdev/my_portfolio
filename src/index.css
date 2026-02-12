@@ -167,21 +167,6 @@
     box-shadow: var(--shadow-xl);
   }
 
-  /* Gold accent underline */
-  .accent-underline {
-    @apply relative inline-block;
-  }
-
-  .accent-underline::after {
-    content: '';
-    @apply absolute bottom-0 left-0 w-full h-[2px] bg-accent;
-  }
-
-  /* Gradient text */
-  .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-primary to-accent;
-  }
-
   /* Section padding */
   .section-padding {
     @apply py-20 md:py-28 lg:py-32;

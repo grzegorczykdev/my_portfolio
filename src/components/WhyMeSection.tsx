@@ -1,8 +1,7 @@
-import { motion } from 'framer-motion';
-import { useInView } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { Code2, Target, TrendingUp, Cpu, Users, ArrowRight } from 'lucide-react';
-import { Button } from './ui/button';
+import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 const WhyMeSection = () => {
@@ -85,6 +84,12 @@ const WhyMeSection = () => {
       y: 0,
       transition: { duration: 0.6, ease: 'easeOut' as const },
     },
+  };
+
+  const EFFECT_KEYS: Record<string, string> = {
+    'whyme.strategy.title': 'whyme.strategy.effect',
+    'whyme.seo_ai.title': 'whyme.seo_ai.effect',
+    'whyme.modern_ai.title': 'whyme.strategy.effect',
   };
 
   return (
@@ -171,13 +176,7 @@ const WhyMeSection = () => {
               </p>
               <p className="text-muted-foreground leading-relaxed mb-4">
                 <span className="font-semibold text-primary">{t('whyme.effect.label')}:</span>{' '}
-                {t(
-                  feature.titleKey === 'whyme.strategy.title'
-                    ? 'whyme.strategy.effect'
-                    : feature.titleKey === 'whyme.seo_ai.title'
-                    ? 'whyme.seo_ai.effect'
-                    : 'whyme.strategy.effect'
-                )}
+                {t(EFFECT_KEYS[feature.titleKey] ?? 'whyme.strategy.effect')}
               </p>
 
               {/* Skills Tags */}

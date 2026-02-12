@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Linkedin, Github, Mail } from "lucide-react";
+import { Linkedin, Mail } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const Footer = () => {
@@ -12,7 +12,6 @@ const Footer = () => {
       href: "https://www.linkedin.com/in/grzegorczyksylwia/",
       label: "LinkedIn",
     },
-    // { icon: Github, href: "#", label: "GitHub" },
     { icon: Mail, href: "mailto:hello@sgweblab.com", label: "Email" },
   ];
 

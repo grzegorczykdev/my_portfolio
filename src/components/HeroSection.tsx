@@ -1,47 +1,12 @@
 import { motion } from "framer-motion";
-import {
-  ArrowRight,
-  Sparkles,
-  Rocket,
-  TrendingUp,
-  Bot,
-  CreditCard,
-} from "lucide-react";
+import { ArrowRight, Sparkles, TrendingUp, Bot } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useScrollToSection } from "@/hooks/useScrollToSection";
 import { Button } from "@/components/ui/button";
 
 const HeroSection = () => {
   const { t } = useLanguage();
-
-  const features = [
-    {
-      icon: Rocket,
-      titleKey: "feature.pages.title",
-      descriptionKey: "feature.pages.description",
-    },
-    {
-      icon: TrendingUp,
-      titleKey: "feature.seo.title",
-      descriptionKey: "feature.seo.description",
-    },
-    {
-      icon: Bot,
-      titleKey: "feature.ai.title",
-      descriptionKey: "feature.ai.description",
-    },
-    {
-      icon: CreditCard,
-      titleKey: "feature.payments.title",
-      descriptionKey: "feature.payments.description",
-    },
-  ];
-
-  const scrollToSection = (id: string) => {
-    const element = document.querySelector(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
+  const { scrollToSection } = useScrollToSection();
 
   return (
     <section className="relative min-h-0 flex items-start lg:items-center overflow-hidden pt-16 md:pt-20 lg:pt-24 pb-6 lg:pb-8">
@@ -93,35 +58,6 @@ const HeroSection = () => {
             >
               {t("hero.subheadline")}
             </motion.p>
-
-            {/* Feature Highlights
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 0.6 }}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6"
-            >
-              {features.map(({ icon: Icon, titleKey, descriptionKey }) => (
-                <div
-                  key={titleKey}
-                  className="flex h-full rounded-2xl border border-border/50 bg-card/70 backdrop-blur px-4 py-5 shadow-xs"
-                >
-                  <div className="flex items-start gap-3">
-                    <div className="mt-0.5 shrink-0">
-                      <Icon className="w-4 h-4 text-accent" />
-                    </div>
-                    <div className="space-y-1.5">
-                      <h3 className="font-display text-sm font-si font-semibold text-primary leading-tight">
-                        {t(titleKey)}
-                      </h3>
-                      <p className="text-xs text-muted-foreground leading-relaxed">
-                        {t(descriptionKey)}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </motion.div> */}
 
             {/* CTAs */}
             <motion.div
