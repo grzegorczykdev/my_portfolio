@@ -1,11 +1,11 @@
 import { useEffect, useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
-import { CheckCircle } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { z } from 'zod';
+
+type ButtonState = 'default' | 'loading' | 'success';
 
 const formSchema = z.object({
   name: z.string().trim().min(1, 'Name is required').max(100),
@@ -24,10 +24,10 @@ const LeadMagnetSection = () => {
     message: '',
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [buttonState, setButtonState] = useState<ButtonState>('default');
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [lastSubmitAt, setLastSubmitAt] = useState<number | null>(null);
+  const [formOpacity, setFormOpacity] = useState(1);
 
   // Ensure reCAPTCHA script is available in local/dev; Netlify injects it on production.
   useEffect(() => {
@@ -47,6 +47,22 @@ const LeadMagnetSection = () => {
     };
   }, []);
 
+  // Reset to default after 4s success; clear form with fade-out
+  useEffect(() => {
+    if (buttonState !== 'success') return;
+    const id = setTimeout(() => {
+      setFormOpacity(0.4);
+      const reset = () => {
+        setFormData({ name: '', email: '', message: '' });
+        setErrors({});
+        setButtonState('default');
+        setFormOpacity(1);
+      };
+      setTimeout(reset, 280);
+    }, 4000);
+    return () => clearTimeout(id);
+  }, [buttonState]);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -63,7 +79,7 @@ const LeadMagnetSection = () => {
       return;
     }
 
-    setIsSubmitting(true);
+    setButtonState('loading');
     setSubmitError(null);
 
     try {
@@ -88,9 +104,7 @@ const LeadMagnetSection = () => {
         throw new Error('Form submission failed');
       }
 
-      setFormData({ name: '', email: '', message: '' });
-      setErrors({});
-      setIsSubmitted(true);
+      setButtonState('success');
       setLastSubmitAt(Date.now());
     } catch (error) {
       if (error instanceof z.ZodError) {
@@ -104,8 +118,7 @@ const LeadMagnetSection = () => {
       } else {
         setSubmitError(t('lead.error'));
       }
-    } finally {
-      setIsSubmitting(false);
+      setButtonState('default');
     }
   };
 
@@ -118,8 +131,11 @@ const LeadMagnetSection = () => {
           transition={{ duration: 0.6 }}
           className="glass bg-card/80 rounded-3xl p-8 md:p-12 shadow-premium-xl border border-white/30"
         >
-          {!isSubmitted ? (
-            <div className="grid md:grid-cols-2 gap-12 items-center">
+          <motion.div
+            animate={{ opacity: formOpacity }}
+            transition={{ duration: 0.28 }}
+            className="grid md:grid-cols-2 gap-12 items-center"
+          >
               {/* Left - Content */}
               <div className="space-y-4">
                 <div className="inline-flex items-center gap-2 px-4 py-2 bg-accent/10 rounded-full text-accent text-sm font-semibold">
@@ -213,26 +229,55 @@ const LeadMagnetSection = () => {
                   )}
                 </div>
 
-                <Button
+                <motion.button
                   type="submit"
-                  variant="accent"
-                  size="lg"
-                  className="w-full mt-4 glass border border-white/30 shadow-premium-lg"
-                  disabled={isSubmitting}
+                  disabled={buttonState === 'loading' || buttonState === 'success'}
+                  transition={{ duration: 0.3 }}
+                  className={`w-full mt-4 min-h-[3rem] rounded-xl font-semibold flex items-center justify-center gap-2 transition-all duration-300 ${
+                    buttonState === 'success'
+                      ? 'bg-emerald-500/90 text-white border border-emerald-400/40 shadow-[0_4px_14px_rgba(16,185,129,0.25)]'
+                      : 'bg-gradient-to-r from-accent to-amber-200/90 text-accent-foreground glass border border-white/30 shadow-premium-lg hover:shadow-premium-xl'
+                  }`}
                 >
-                  {isSubmitting ? (
-                    <span className="flex items-center gap-2">
-                      <motion.div
-                        animate={{ rotate: 360 }}
-                        transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
-                        className="w-4 h-4 border-2 border-current border-t-transparent rounded-full"
-                      />
-                      {t('lead.processing')}
-                    </span>
-                  ) : (
-                    <span className="flex items-center gap-2">{t('lead.submit')}</span>
+                  {buttonState === 'default' && (
+                    <motion.span
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      {t('lead.submit')}
+                    </motion.span>
                   )}
-                </Button>
+                  {buttonState === 'loading' && (
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.2 }}
+                      className="w-5 h-5 border-[2px] border-accent-foreground/70 border-t-transparent rounded-full animate-spin"
+                    />
+                  )}
+                  {buttonState === 'success' && (
+                    <motion.svg
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.2 }}
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="w-6 h-6"
+                    >
+                      <motion.path
+                        d="M5 13l4 4L19 7"
+                        initial={{ pathLength: 0 }}
+                        animate={{ pathLength: 1 }}
+                        transition={{ duration: 0.32, ease: 'easeOut' }}
+                      />
+                    </motion.svg>
+                  )}
+                </motion.button>
                 <p className="text-xs text-muted-foreground text-center">
                   {t('lead.privacyNote')}
                 </p>
@@ -241,29 +286,7 @@ const LeadMagnetSection = () => {
                   <p className="text-xs text-destructive text-center">{submitError}</p>
                 )}
               </form>
-            </div>
-          ) : (
-            /* Success State */
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.4 }}
-              className="relative text-center py-8 glass rounded-2xl border border-white/20 bg-white/5"
-            >
-              <button
-                type="button"
-                onClick={() => setIsSubmitted(false)}
-                className="absolute right-3 top-3 text-muted-foreground hover:text-primary transition-colors"
-                aria-label={t('lead.close')}
-              >
-                ✕
-              </button>
-              <div className="w-20 h-20 mx-auto bg-accent/10 rounded-full flex items-center justify-center mb-6">
-                <CheckCircle className="w-10 h-10 text-accent" />
-              </div>
-              <p className="text-muted-foreground max-w-md mx-auto">{t('lead.success')}</p>
-            </motion.div>
-          )}
+          </motion.div>
         </motion.div>
       </div>
     </section>
