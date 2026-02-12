@@ -234,7 +234,7 @@ const LeadMagnetSection = () => {
                     name="message"
                     value={formData.message}
                     onChange={handleChange}
-                    className={`w-full rounded-md border bg-transparent px-3 py-3 text-sm text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 transition-colors duration-200 ${
+                    className={`w-full rounded-md border bg-transparent px-3 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus-visible:outline-none transition-colors duration-200 ${
                       errors.message ? 'border-destructive' : 'border-border'
                     }`}
                     rows={4}
