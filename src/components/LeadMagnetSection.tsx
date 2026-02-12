@@ -350,12 +350,12 @@ const LeadMagnetSection = () => {
                   rateLimited
                 }
                 transition={{ duration: 0.3 }}
-                className={`w-full mt-4 min-h-[3rem] rounded-xl font-semibold flex items-center justify-center gap-2 transition-all duration-300 ${
+                className={`w-full mt-4 min-h-[3rem] rounded-xl font-semibold flex items-center justify-center gap-2 transition-all duration-300 outline-none ${
                   rateLimited ? "opacity-60 cursor-not-allowed" : ""
                 } ${
                   buttonState === "success"
                     ? "bg-emerald-500/90 text-white border border-emerald-400/40 shadow-[0_4px_14px_rgba(16,185,129,0.25)]"
-                    : "bg-gradient-to-r from-accent to-amber-200/90 text-accent-foreground glass border border-white/30 shadow-premium-lg hover:shadow-premium-xl"
+                    : "bg-gradient-to-r from-accent to-amber-200/90 text-accent-foreground shadow-premium-lg hover:shadow-premium-xl"
                 }`}
               >
                 {buttonState === "default" && (
