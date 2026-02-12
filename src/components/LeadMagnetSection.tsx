@@ -27,7 +27,6 @@ const LeadMagnetSection = () => {
   const [buttonState, setButtonState] = useState<ButtonState>('default');
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [lastSubmitAt, setLastSubmitAt] = useState<number | null>(null);
-  const [formOpacity, setFormOpacity] = useState(1);
 
   // Ensure reCAPTCHA script is available in local/dev; Netlify injects it on production.
   useEffect(() => {
@@ -47,18 +46,13 @@ const LeadMagnetSection = () => {
     };
   }, []);
 
-  // Reset to default after 4s success; clear form with fade-out
+  // Reset to default after 4s success; clear form fields only
   useEffect(() => {
     if (buttonState !== 'success') return;
     const id = setTimeout(() => {
-      setFormOpacity(0.4);
-      const reset = () => {
-        setFormData({ name: '', email: '', message: '' });
-        setErrors({});
-        setButtonState('default');
-        setFormOpacity(1);
-      };
-      setTimeout(reset, 280);
+      setFormData({ name: '', email: '', message: '' });
+      setErrors({});
+      setButtonState('default');
     }, 4000);
     return () => clearTimeout(id);
   }, [buttonState]);
@@ -131,11 +125,7 @@ const LeadMagnetSection = () => {
           transition={{ duration: 0.6 }}
           className="glass bg-card/80 rounded-3xl p-8 md:p-12 shadow-premium-xl border border-white/30"
         >
-          <motion.div
-            animate={{ opacity: formOpacity }}
-            transition={{ duration: 0.28 }}
-            className="grid md:grid-cols-2 gap-12 items-center"
-          >
+          <div className="grid md:grid-cols-2 gap-12 items-center">
               {/* Left - Content */}
               <div className="space-y-4">
                 <div className="inline-flex items-center gap-2 px-4 py-2 bg-accent/10 rounded-full text-accent text-sm font-semibold">
@@ -286,7 +276,7 @@ const LeadMagnetSection = () => {
                   <p className="text-xs text-destructive text-center">{submitError}</p>
                 )}
               </form>
-          </motion.div>
+          </div>
         </motion.div>
       </div>
     </section>
