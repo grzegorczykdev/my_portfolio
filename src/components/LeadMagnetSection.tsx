@@ -5,7 +5,49 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { Input } from '@/components/ui/input';
 import { z } from 'zod';
 
+const RATE_LIMIT_KEY = 'sgweblab_form_hits';
+const RATE_LIMIT_MAX = 2;
+const RATE_LIMIT_WINDOW_MS = 24 * 60 * 60 * 1000;
+const CONTACT_EMAIL = 'hello@sylwia.dev';
+
 type ButtonState = 'default' | 'loading' | 'success';
+
+interface RateLimitData {
+  firstSubmitAt: number;
+  count: number;
+}
+
+const getRateLimitData = (): RateLimitData | null => {
+  if (typeof window === 'undefined') return null;
+  try {
+    const raw = localStorage.getItem(RATE_LIMIT_KEY);
+    return raw ? (JSON.parse(raw) as RateLimitData) : null;
+  } catch {
+    return null;
+  }
+};
+
+const isRateLimited = (): boolean => {
+  const data = getRateLimitData();
+  if (!data || data.count === 0) return false;
+  if (Date.now() - data.firstSubmitAt > RATE_LIMIT_WINDOW_MS) return false;
+  return data.count >= RATE_LIMIT_MAX;
+};
+
+const recordFormSubmission = (): void => {
+  if (typeof window === 'undefined') return;
+  const now = Date.now();
+  const data = getRateLimitData();
+  const isWindowExpired = !data || now - data.firstSubmitAt > RATE_LIMIT_WINDOW_MS;
+  const next: RateLimitData = isWindowExpired
+    ? { firstSubmitAt: now, count: 1 }
+    : { firstSubmitAt: data!.firstSubmitAt, count: data!.count + 1 };
+  try {
+    localStorage.setItem(RATE_LIMIT_KEY, JSON.stringify(next));
+  } catch {
+    /* ignore */
+  }
+};
 
 const formSchema = z.object({
   name: z.string().trim().min(1, 'Name is required').max(100),
@@ -26,8 +68,12 @@ const LeadMagnetSection = () => {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [buttonState, setButtonState] = useState<ButtonState>('default');
   const [submitError, setSubmitError] = useState<string | null>(null);
-  const [lastSubmitAt, setLastSubmitAt] = useState<number | null>(null);
   const [showShake, setShowShake] = useState(false);
+  const [rateLimited, setRateLimited] = useState(false);
+
+  useEffect(() => {
+    setRateLimited(isRateLimited());
+  }, []);
 
   // Ensure reCAPTCHA script is available in local/dev; Netlify injects it on production.
   useEffect(() => {
@@ -69,8 +115,8 @@ const LeadMagnetSection = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (lastSubmitAt && Date.now() - lastSubmitAt < 8000) {
-      setSubmitError(t('lead.rateLimit'));
+    if (isRateLimited()) {
+      setRateLimited(true);
       return;
     }
 
@@ -100,7 +146,11 @@ const LeadMagnetSection = () => {
       }
 
       setButtonState('success');
-      setLastSubmitAt(Date.now());
+      recordFormSubmission();
+      const data = getRateLimitData();
+      if (data && data.count >= RATE_LIMIT_MAX) {
+        setRateLimited(true);
+      }
     } catch (error) {
       if (error instanceof z.ZodError) {
         setShowShake(true);
@@ -264,9 +314,11 @@ const LeadMagnetSection = () => {
 
                 <motion.button
                   type="submit"
-                  disabled={buttonState === 'loading' || buttonState === 'success'}
+                  disabled={buttonState === 'loading' || buttonState === 'success' || rateLimited}
                   transition={{ duration: 0.3 }}
                   className={`w-full mt-4 min-h-[3rem] rounded-xl font-semibold flex items-center justify-center gap-2 transition-all duration-300 ${
+                    rateLimited ? 'opacity-60 cursor-not-allowed' : ''
+                  } ${
                     buttonState === 'success'
                       ? 'bg-emerald-500/90 text-white border border-emerald-400/40 shadow-[0_4px_14px_rgba(16,185,129,0.25)]'
                       : 'bg-gradient-to-r from-accent to-amber-200/90 text-accent-foreground glass border border-white/30 shadow-premium-lg hover:shadow-premium-xl'
@@ -314,8 +366,22 @@ const LeadMagnetSection = () => {
                 <p className="text-xs text-muted-foreground text-center">
                   {t('lead.privacyNote')}
                 </p>
+                <p className="text-xs text-muted-foreground text-center">
+                  {t('lead.antiSpamNote')}
+                </p>
                 <div data-netlify-recaptcha="true" className="flex justify-center" />
-                {submitError && (
+                {rateLimited && (
+                  <p className="text-xs text-destructive text-center">
+                    {t('lead.rateLimitExceeded')}
+                    <a
+                      href={`mailto:${CONTACT_EMAIL}`}
+                      className="font-medium underline hover:no-underline"
+                    >
+                      {CONTACT_EMAIL}
+                    </a>
+                  </p>
+                )}
+                {submitError && !rateLimited && (
                   <p className="text-xs text-destructive text-center">{submitError}</p>
                 )}
               </form>

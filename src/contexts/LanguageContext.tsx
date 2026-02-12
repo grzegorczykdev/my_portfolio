@@ -532,6 +532,14 @@ export const translations: Translations = {
     en: "Please wait a moment before sending again.",
     pl: "Poczekaj chwilę przed ponownym wysłaniem.",
   },
+  "lead.antiSpamNote": {
+    en: "We use anti-spam protections so your message safely reaches my inbox.",
+    pl: "Używamy zabezpieczeń anty-spamowych, aby Twoja wiadomość bezpiecznie trafiła do mojej skrzynki.",
+  },
+  "lead.rateLimitExceeded": {
+    en: "Oops! It looks like my inbox is very busy right now. Please write to me directly at: ",
+    pl: "Ups! Wygląda na to, że moja skrzynka jest teraz bardzo oblegana. Proszę, napisz do mnie bezpośrednio na adres: ",
+  },
   "lead.errors.nameRequired": {
     en: "Name is required",
     pl: "Imię jest wymagane",
