@@ -14,6 +14,7 @@ const ServicesSection = () => {
       icon: Palette,
       badgeBg: 'bg-accent/15',
       badgeText: 'text-accent',
+      ctaStyles: 'text-accent border-accent/40 bg-accent/10 hover:bg-accent/20 hover:border-accent/60 hover:shadow-[0_8px_24px_rgba(244,213,154,0.15)]',
       titleKey: 'services.group.dev.title',
       descKey: 'services.group.dev.desc',
       bullets: ['services.group.dev.b1', 'services.group.dev.b2', 'services.group.dev.b3'],
@@ -23,6 +24,7 @@ const ServicesSection = () => {
       icon: Sparkles,
       badgeBg: 'bg-indigo-400/15',
       badgeText: 'text-indigo-200',
+      ctaStyles: 'text-indigo-200 border-indigo-400/40 bg-indigo-400/10 hover:bg-indigo-400/20 hover:border-indigo-400/60 hover:shadow-[0_8px_24px_rgba(129,140,248,0.15)]',
       titleKey: 'services.group.seoai.title',
       descKey: 'services.group.seoai.desc',
       bullets: ['services.group.seoai.b1', 'services.group.seoai.b2', 'services.group.seoai.b3'],
@@ -32,6 +34,7 @@ const ServicesSection = () => {
       icon: ServerCog,
       badgeBg: 'bg-emerald-400/15',
       badgeText: 'text-emerald-200',
+      ctaStyles: 'text-emerald-200 border-emerald-400/40 bg-emerald-400/10 hover:bg-emerald-400/20 hover:border-emerald-400/60 hover:shadow-[0_8px_24px_rgba(52,211,153,0.15)]',
       titleKey: 'services.group.care.title',
       descKey: 'services.group.care.desc',
       bullets: ['services.group.care.b1', 'services.group.care.b2', 'services.group.care.b3'],
@@ -111,7 +114,7 @@ const ServicesSection = () => {
                 <Button
                   asChild
                   variant="ghost"
-                  className="mt-4 self-start w-fit border border-accent/50 text-accent bg-transparent uppercase tracking-wide text-sm font-semibold px-5 py-2 rounded-lg transition-all duration-300 hover:bg-accent hover:text-primary hover:shadow-[0_8px_24px_rgba(244,213,154,0.22)]"
+                  className={`mt-4 self-start w-fit border uppercase tracking-wide text-sm font-semibold px-5 py-2 rounded-lg transition-all duration-300 ${group.ctaStyles}`}
                 >
                   <a href="#contact" className="flex items-center gap-2">
                     {t(group.ctaKey)}
