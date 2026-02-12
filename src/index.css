@@ -77,6 +77,11 @@
     --sidebar-ring: 222 47% 11%;
   }
 
+  /* Form errors use amber #F59E0B in contact section */
+  #contact {
+    --destructive: 38 92% 50%;
+  }
+
   .dark {
     --background: 222 47% 6%;
     --foreground: 60 20% 98%;
