@@ -177,9 +177,9 @@
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
 
-  /* Hero container - reduced left padding on mobile to fix rightward shift */
+  /* Hero container - symmetric reduced padding on mobile to fix rightward shift */
   .container-hero-mobile {
-    @apply max-w-7xl mx-auto pl-3 pr-4 sm:px-6 lg:px-8;
+    @apply max-w-7xl mx-auto px-3 sm:px-6 lg:px-8;
   }
 
   /* Bento grid item */
