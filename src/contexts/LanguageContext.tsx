@@ -502,6 +502,14 @@ export const translations: Translations = {
     en: "Do you have a non-standard request? Write freely! I love projects that require unconventional thinking. Describe your idea and together we'll figure out how to execute it best.",
     pl: "Masz niestandardowe zlecenie? Napisz śmiało! Uwielbiam projekty, które wymagają nieszablonowego myślenia. Opisz swój pomysł, a wspólnie zastanowimy się, jak go najlepiej zrealizować.",
   },
+  "lead.emailOrFormPrefix": {
+    en: "Send an email to ",
+    pl: "Wyślij maila na ",
+  },
+  "lead.emailOrFormSuffix": {
+    en: " or use the form.",
+    pl: " lub skorzystaj z formularza.",
+  },
   "lead.first_call": {
     en: "The first call is non-binding — we'll see what can be done and how to tailor the scope.",
     pl: "Pierwsza rozmowa jest niezobowiązująca — zobaczymy, co da się zrobić i jak dopasować zakres.",

@@ -215,6 +215,16 @@ const LeadMagnetSection = () => {
                   {t('lead.body.rest')}
                 </p>
                 <p className="text-sm text-muted-foreground">{t('lead.custom')}</p>
+                <p className="text-sm text-muted-foreground">
+                  {t('lead.emailOrFormPrefix')}
+                  <a
+                    href={`mailto:${CONTACT_EMAIL}`}
+                    className="text-accent font-medium hover:underline"
+                  >
+                    {CONTACT_EMAIL}
+                  </a>
+                  {t('lead.emailOrFormSuffix')}
+                </p>
               </div>
 
               {/* Right - Form */}
@@ -252,6 +262,7 @@ const LeadMagnetSection = () => {
                     type="text"
                     value={formData.name}
                     onChange={handleChange}
+                    maxLength={100}
                     className={`transition-colors duration-200 ${errors.name ? 'border-destructive' : ''}`}
                   />
                   {errors.name && (
@@ -278,6 +289,7 @@ const LeadMagnetSection = () => {
                     type="email"
                     value={formData.email}
                     onChange={handleChange}
+                    maxLength={255}
                     className={`transition-colors duration-200 ${errors.email ? 'border-destructive' : ''}`}
                   />
                   {errors.email && (
@@ -304,11 +316,15 @@ const LeadMagnetSection = () => {
                     value={formData.message}
                     onChange={handleChange}
                     onFocus={handleMessageFocus}
+                    maxLength={2000}
                     className={`w-full rounded-md border bg-transparent px-3 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus-visible:outline-none transition-colors duration-200 ${
                       errors.message ? 'border-destructive' : 'border-border'
                     }`}
                     rows={4}
                   />
+                  <p className="text-xs text-muted-foreground text-right mt-1">
+                    {formData.message.length} / 2000
+                  </p>
                   {errors.message && (
                     <motion.p
                       initial={{ opacity: 0 }}
