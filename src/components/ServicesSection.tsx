@@ -60,7 +60,7 @@ const ServicesSection = () => {
   return (
     <section
       id="services"
-      className="section-padding pb-12 md:pb-16 bg-primary text-white"
+      className="section-padding pb-6 md:pb-8 bg-primary text-white"
       ref={ref}
     >
       <div className="container-custom space-y-14">

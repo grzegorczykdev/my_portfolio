@@ -9,7 +9,7 @@ const HeroSection = () => {
   const { scrollToSection } = useScrollToSection();
 
   return (
-    <section className="relative min-h-0 flex items-start lg:items-center overflow-hidden pt-16 md:pt-20 lg:pt-24 pb-6 lg:pb-8">
+    <section className="relative min-h-0 flex items-start lg:items-center overflow-hidden pt-16 md:pt-20 lg:pt-24 pb-12 md:pb-16 lg:pb-20">
       {/* Subtle background gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-secondary/30" />
 

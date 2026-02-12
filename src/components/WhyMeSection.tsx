@@ -95,7 +95,7 @@ const WhyMeSection = () => {
   return (
     <section
       id="about"
-      className="section-padding bg-secondary/30 pt-16 md:pt-18 lg:pt-20"
+      className="section-padding bg-secondary/30"
       ref={ref}
     >
       <div className="container-custom">

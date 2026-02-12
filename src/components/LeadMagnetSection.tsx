@@ -218,7 +218,7 @@ const LeadMagnetSection = () => {
   return (
     <section
       id="contact"
-      className="section-padding pt-10 md:pt-14 bg-primary"
+      className="section-padding pt-6 md:pt-8 pb-6 md:pb-8 bg-primary"
       ref={ref}
     >
       <div className="container-custom">
